@@ -1,5 +1,7 @@
 # TFNP - Tools for Nhật Prolems
 
+![a](https://github.com/micti/tfnp/actions/workflows/node.js.yml/badge.svg)
+
 A collection of data tools (in NodeJS) for solve the data probems that are from my colleague, named Nhật. He solved the problem by Python first, almost cases he used Pandas, then I will use TFNP to resolve in NodeJS.
 
 And now, not only Nhật prolems, but more from other colleagues, more prolems, with fun and passion (Many solutions by Python, Rust, Go, NodeJS).
