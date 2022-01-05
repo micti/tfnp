@@ -6,6 +6,7 @@ class Csv {
     this.writer = csvWrite(output)
     this.options = {
       rowFormat: Object.keys(fields),
+      header: false,
       ...options
     }
 
@@ -13,6 +14,10 @@ class Csv {
   }
 
   async generate () {
+    if (this.options.header) {
+      await this.writer.writeLine(this.options.rowFormat.join(','))
+    }
+
     let nextValue = this.group.gen()
     while (nextValue) {
       await this.writer.writeLine(this._genRow(nextValue))

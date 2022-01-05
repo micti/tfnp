@@ -22,7 +22,8 @@ const gen = csvGen(output, {
   limit: [
     200,
     5
-  ]
+  ],
+  header: true
 })
 
 ;(async () => {
