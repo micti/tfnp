@@ -4,7 +4,7 @@ import writeFile from '../../../src/io/write.js'
 import memoryUsage from '../../../src/util/memory.js'
 import { md5 } from '../../../src/util/hash.js'
 
-const path = join(import.meta.url.replace('file:', ''), '../../files/test.csv')
+const path = join(import.meta.url.replace('file:', ''), '../../files/output/test.csv')
 const writer = writeFile(path)
 
 const data = md5('1')

@@ -3,7 +3,7 @@ import { join } from 'path'
 import writeCSV from '../../../src/io/csv_write.js'
 import memoryUsage from '../../../src/util/memory.js'
 
-const path = join(import.meta.url.replace('file:', ''), '../../files/holder.csv')
+const path = join(import.meta.url.replace('file:', ''), '../../files/output/holder.csv')
 const writer = writeCSV(path)
 
 async function testWrite () {

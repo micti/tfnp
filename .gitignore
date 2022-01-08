@@ -1,7 +1,7 @@
 node_modules
 coverage
-docs/examples/files/holder.csv
-docs/examples/files/test.csv
+docs/examples/files/output/*
+!docs/examples/files/output/.gitkeep
 docs/problems/csv_check/file/data.csv
 docs/problems/csv_check/file/data_error.csv
 docs/problems/csv_clone/file/data_clone.csv
