@@ -11,6 +11,6 @@
     ]
   },
   "scripts": {
-    "test": "jest"
+    "test": "npx standard && NODE_OPTIONS=--experimental-vm-modules npx jest"
   }
 }

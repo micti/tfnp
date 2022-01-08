@@ -39,7 +39,7 @@ for (let i = 0; i < 1; i++) {
 
 const d = genField({
   type: 'nanoid',
-  nanoid: 'shortIid',
+  nanoid: 'shortIid'
   // length: 2
 })
 
