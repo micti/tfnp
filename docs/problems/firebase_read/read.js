@@ -1,7 +1,6 @@
 import { join } from 'path'
 
 import readCsv from '../../../src/io/csv_read.js'
-import writeCsv from '../../../src/io/csv_write.js'
 import memoryUsage from '../../../src/util/memory.js'
 
 const path = join(import.meta.url.replace('file:', ''), '../file/data.data')
@@ -9,7 +8,6 @@ const path = join(import.meta.url.replace('file:', ''), '../file/data.data')
 const csvReader = readCsv(path, {
   engine: 'row'
 })
-// const csvWriter = writeCsv(clonePath)
 
 /**
  * Line process
