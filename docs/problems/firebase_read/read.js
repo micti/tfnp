@@ -19,7 +19,7 @@ const csvReader = readCsv(path, {
  */
 async function read2 (val, result, row) {
   // Fake row process
-  const b = JSON.parse(val)
+  JSON.parse(val)
 
   if (!result) result = 0
 
