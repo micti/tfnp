@@ -19,7 +19,7 @@ This project can be POC for NodeJS can handle small CSV (~2 mil rows) in accepta
 
 ## Install
 
-Currently, there is no packages published. So the only way to install is `git`, you can clone it and run directly.
+Currently, there is no published package. So the only way to install is `git`, you can clone it and run directly.
 
     git clone git@github.com:micti/tfnp.git
 
@@ -31,3 +31,4 @@ No dependency is required. If you want to run benchmark or test, please install 
 
 - [CSV check](docs/problems/csv_check/)
 - [CSV clone](docs/problems/csv_clone/)
+- [Firebase read](docs/problems/firebase_read/)
