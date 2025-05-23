@@ -69,7 +69,7 @@ class Csv {
         this.p.state = parser.state.IN_FIELD
         // Capture value
         // this.p.current.push(buffer[cur])
-        this.p.currentBuffer.writeInt8(buffer[cur], this.p.currentCount)
+        this.p.currentBuffer.writeUInt8(buffer[cur], this.p.currentCount)
         this.p.currentCount++
         cur++
         continue
@@ -104,7 +104,7 @@ class Csv {
         this.p.state = parser.state.IN_FIELD
         // Capture value
         // this.p.current.push(buffer[cur])
-        this.p.currentBuffer.writeInt8(buffer[cur], this.p.currentCount)
+        this.p.currentBuffer.writeUInt8(buffer[cur], this.p.currentCount)
         this.p.currentCount++
         cur++
         continue
@@ -132,7 +132,7 @@ class Csv {
 
         // Capture value
         // this.p.current.push(buffer[cur])
-        this.p.currentBuffer.writeInt8(buffer[cur], this.p.currentCount)
+        this.p.currentBuffer.writeUInt8(buffer[cur], this.p.currentCount)
         this.p.currentCount++
         cur++
         continue
@@ -152,7 +152,7 @@ class Csv {
 
         // Capture value
         // this.p.current.push(buffer[cur])
-        this.p.currentBuffer.writeInt8(buffer[cur], this.p.currentCount)
+        this.p.currentBuffer.writeUInt8(buffer[cur], this.p.currentCount)
         this.p.currentCount++
         cur++
         continue
@@ -162,7 +162,7 @@ class Csv {
         if (buffer[cur] === this.p.token.e) {
           // capture value
           // this.p.current.push(buffer[cur])
-          this.p.currentBuffer.writeInt8(buffer[cur], this.p.currentCount)
+          this.p.currentBuffer.writeUInt8(buffer[cur], this.p.currentCount)
           this.p.currentCount++
           this.p.state = parser.state.IN_QUOTE_FIELD
           cur++
