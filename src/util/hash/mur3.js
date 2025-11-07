@@ -1,51 +1,73 @@
-// for bf
+// MurmurHash3 32-bit implementation
+// Based on: https://en.wikipedia.org/wiki/MurmurHash
 
-// wiki
-// algorithm Murmur3_32 is
-//     // Note: In this version, all arithmetic is performed with unsigned 32-bit integers.
-//     //       In the case of overflow, the result is reduced modulo 232.
-//     input: key, len, seed
+/**
+ * MurmurHash3 32-bit hash function
+ * @param {string} key - The string to hash
+ * @param {number} seed - The seed value (default: 0)
+ * @returns {number} 32-bit hash value
+ */
+export function murmur3_32 (key, seed = 0) {
+  const c1 = 0xcc9e2d51
+  const c2 = 0x1b873593
+  const r1 = 15
+  const r2 = 13
+  const m = 5
+  const n = 0xe6546b64
 
-//     c1 ← 0xcc9e2d51
-//     c2 ← 0x1b873593
-//     r1 ← 15
-//     r2 ← 13
-//     m ← 5
-//     n ← 0xe6546b64
+  let hash = seed
 
-//     hash ← seed
+  const bytes = Buffer.from(key, 'utf8')
+  const len = bytes.length
+  const blocks = Math.floor(len / 4)
 
-//     for each fourByteChunk of key do
-//         k ← fourByteChunk
+  // Process 4-byte chunks
+  for (let i = 0; i < blocks; i++) {
+    let k = bytes[i * 4] |
+            (bytes[i * 4 + 1] << 8) |
+            (bytes[i * 4 + 2] << 16) |
+            (bytes[i * 4 + 3] << 24)
 
-//         k ← k × c1
-//         k ← k ROL r1
-//         k ← k × c2
+    k = Math.imul(k, c1)
+    k = (k << r1) | (k >>> (32 - r1))
+    k = Math.imul(k, c2)
 
-//         hash ← hash XOR k
-//         hash ← hash ROL r2
-//         hash ← (hash × m) + n
+    hash ^= k
+    hash = (hash << r2) | (hash >>> (32 - r2))
+    hash = Math.imul(hash, m) + n
+  }
 
-//     with any remainingBytesInKey do
-//         remainingBytes ← SwapToLittleEndian(remainingBytesInKey)
-//         // Note: Endian swapping is only necessary on big-endian machines.
-//         //       The purpose is to place the meaningful digits towards the low end of the value,
-//         //       so that these digits have the greatest potential to affect the low range digits
-//         //       in the subsequent multiplication.  Consider that locating the meaningful digits
-//         //       in the high range would produce a greater effect upon the high digits of the
-//         //       multiplication, and notably, that such high digits are likely to be discarded
-//         //       by the modulo arithmetic under overflow.  We don't want that.
+  // Process remaining bytes
+  let k1 = 0
+  const tail = len % 4
 
-//         remainingBytes ← remainingBytes × c1
-//         remainingBytes ← remainingBytes ROL r1
-//         remainingBytes ← remainingBytes × c2
+  if (tail >= 3) k1 ^= bytes[blocks * 4 + 2] << 16
+  if (tail >= 2) k1 ^= bytes[blocks * 4 + 1] << 8
+  if (tail >= 1) {
+    k1 ^= bytes[blocks * 4]
+    k1 = Math.imul(k1, c1)
+    k1 = (k1 << r1) | (k1 >>> (32 - r1))
+    k1 = Math.imul(k1, c2)
+    hash ^= k1
+  }
 
-//         hash ← hash XOR remainingBytes
+  // Finalization
+  hash ^= len
+  hash ^= hash >>> 16
+  hash = Math.imul(hash, 0x85ebca6b)
+  hash ^= hash >>> 13
+  hash = Math.imul(hash, 0xc2b2ae35)
+  hash ^= hash >>> 16
 
-//     hash ← hash XOR len
+  return hash >>> 0 // Convert to unsigned 32-bit integer
+}
 
-//     hash ← hash XOR (hash >> 16)
-//     hash ← hash × 0x85ebca6b
-//     hash ← hash XOR (hash >> 13)
-//     hash ← hash × 0xc2b2ae35
-//     hash ← hash XOR (hash >> 16)
+/**
+ * MurmurHash3 32-bit hash function returning hex string
+ * @param {string} key - The string to hash
+ * @param {number} seed - The seed value (default: 0)
+ * @returns {string} Hex string representation
+ */
+export function murmur3_32_hex (key, seed = 0) {
+  return murmur3_32(key, seed).toString(16).padStart(8, '0')
+}
